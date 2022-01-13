@@ -93,4 +93,4 @@ module.exports = {
 };
 ```
 
-scc の import と同様に style.scss が import できる。
+css の import と同様に style.scss が import できる。
