@@ -71,7 +71,7 @@ yarn add --dev jest @types/jest ts-jest @testing-library/react
 
 に変更。
 
-### sass 導入
+### sass 導入（style は root/public に入れる）
 
 ```bash
 yarn add @zeit/next-sass node-sass
