@@ -3,6 +3,7 @@ import { getPagePostsData } from "api/post";
 import { useEffect, useState } from "react";
 import { POSTLIST } from "types/post";
 import Post from "components/post";
+import Pagination from "components/pagination";
 
 export default function Page() {
   const [posts, setPosts] = useState<POSTLIST>();

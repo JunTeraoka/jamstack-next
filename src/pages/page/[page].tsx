@@ -6,10 +6,9 @@ import { getPagePostsData } from "api/post";
 import Post from "components/post";
 import Pagination from "components/pagination";
 
-const PostDetail: NextPage<POSTLIST> = (staticPosts) => {
+const PostsPage: NextPage<POSTLIST> = (posts) => {
   const router = useRouter();
-  const posts = staticPosts;
-
+  if (!posts) return <div>Loading....</div>;
   return (
     <>
       <div>
@@ -21,8 +20,8 @@ const PostDetail: NextPage<POSTLIST> = (staticPosts) => {
         </ul>
         <Pagination
           currentPage={Number(router.query.page)}
-          hasPrevious={posts.pageInfo.offsetPagination.hasPrevious}
-          hasMore={posts.pageInfo.offsetPagination.hasMore}
+          hasPrevious={posts.pageInfo?.offsetPagination.hasPrevious}
+          hasMore={posts.pageInfo?.offsetPagination.hasMore}
         />
       </div>
     </>
@@ -46,4 +45,4 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-export default PostDetail;
+export default PostsPage;
