@@ -29,7 +29,8 @@ const PostsPage: NextPage<POSTLIST> = (posts) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getPostPagePaths();
+  const allPaths = await getPostPagePaths();
+  const paths = allPaths.slice(0, Math.min(5, allPaths.length));
   return {
     paths,
     fallback: true,

@@ -24,7 +24,7 @@ const Post: React.VFC<POST> = ({
               {changeFormatDate(date, "YYYY.MM.DD")}
             </span>
             <span className="text-xs text-gray-500 mx-1">
-              {categories.nodes[0].name}
+              {categories.nodes[0]?.name}
             </span>
           </a>
         </Link>
