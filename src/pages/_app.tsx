@@ -10,7 +10,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div>
       <Header />
-      <main role="main" className="max-w-3xl mx-auto">
+      <main role="main" className="max-w-3xl mx-auto py-10 min-h-screen">
         <Component {...pageProps} />
       </main>
       <Footer />

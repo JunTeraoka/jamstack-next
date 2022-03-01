@@ -20,20 +20,20 @@ export type POST = {
 
 export type POSTLIST = {
   pageInfo: {
-    endCursor: string;
-    hasNextPage: boolean;
-    hasPreviousPage: boolean;
-    startCursor: string;
+    offsetPagination: {
+      hasMore: boolean;
+      hasPrevious: boolean;
+      total: number;
+    };
   };
   edges: [
     {
-      cursor: string;
       node: POST;
     }
   ];
 };
 
-//news詳細データ取得用
+//post詳細データ取得用
 export type POSTDETAIL = {
   staticPostDetail: {
     id: string;
@@ -59,7 +59,8 @@ export type POSTDETAIL = {
     postId: number;
   }[];
 };
-//news詳細パス取得用
+
+//post詳細パス取得用
 export type POSTPATHS = {
   data: {
     posts: {
@@ -73,30 +74,15 @@ export type POSTPATHS = {
   };
 };
 
-export type NEWSANDPATHS = {
+//post数取得用
+export type TOTALPOSTS = {
   data: {
     posts: {
-      nodes: [
-        {
-          id: string;
-          postId: number;
-          title: string;
-          date: string;
-          categories: {
-            nodes: [
-              {
-                name: string;
-              }
-            ];
-          };
-        }
-      ];
+      pageInfo: {
+        offsetPagination: {
+          total: number;
+        };
+      };
     };
   };
-  pagenation: PARAMS[];
-};
-
-export type PARAMS = {
-  lastId: string;
-  number: string;
 };

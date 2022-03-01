@@ -1,14 +1,12 @@
-import { POSTPATHS } from "types/post";
+import { POSTPATHS, TOTALPOSTS } from "types/post";
 import { api_url } from "api/common";
 
-type QUERYPARAMS = {
-  first?: number;
-  search?: string | string[];
-};
+const PERPAGE = 12;
 
-//ページ番号に対応するnewsを取得する。
+//ページ番号に対応するpostを取得する。
 export const getPagePostsData = async (
-  params: QUERYPARAMS = { first: 1000 }
+  page: number = 1,
+  search: string | string[] = ""
 ) => {
   const response = await fetch(api_url, {
     method: "POST",
@@ -17,17 +15,21 @@ export const getPagePostsData = async (
       query: `
       query PostsQuery{
         posts(
-          first: ${params.first ?? 1000},
-          where: {search: "${params.search ?? ""}"}
+          where: {
+            offsetPagination: {offset: ${
+              (page - 1) * PERPAGE
+            }, size: ${PERPAGE}},
+            search: "${search}"
+          }
           ){
           pageInfo {
-            endCursor
-            hasNextPage
-            hasPreviousPage
-            startCursor
+            offsetPagination {
+              hasPrevious
+              hasMore
+              total
+            }
           }
           edges {
-            cursor
             node {
               postId
               slug
@@ -52,6 +54,38 @@ export const getPagePostsData = async (
   });
   const json = await response.json();
   return json;
+};
+
+//一覧ページのpathを取得
+export const getPostPagePaths = async () => {
+  const response = await fetch(api_url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `
+        query PostPagePaths{
+          posts {
+            pageInfo {
+              offsetPagination {
+                total
+              }
+            }
+          }
+        }
+      `,
+    }),
+  });
+  const json: TOTALPOSTS = await response.json();
+  const totalPages = Math.ceil(
+    json.data.posts.pageInfo.offsetPagination.total / PERPAGE
+  );
+  return [...Array(totalPages)].map((_, index) => {
+    return {
+      params: {
+        page: `${index + 1}`,
+      },
+    };
+  });
 };
 
 //post詳細のpathを取得

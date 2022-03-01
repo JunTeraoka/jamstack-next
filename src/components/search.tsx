@@ -13,7 +13,7 @@ const Search: React.VFC<PROPS> = ({ className }) => {
     e.preventDefault();
     router.push({
       pathname: "/search",
-      query: { s: query },
+      query: { s: query, p: 1 },
     });
   };
 

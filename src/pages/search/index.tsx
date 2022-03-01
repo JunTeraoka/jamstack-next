@@ -8,10 +8,9 @@ export default function Page() {
   const [posts, setPosts] = useState<POSTLIST>();
   const router = useRouter();
   const query = router.query;
-  console.log(query);
 
   const searchPosts = async () => {
-    const json = await getPagePostsData({ search: query.s });
+    const json = await getPagePostsData(Number(query.p), query.s);
     return json.data.posts;
   };
 
