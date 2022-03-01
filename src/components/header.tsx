@@ -5,7 +5,7 @@ import Search from "./search";
 const Header: React.VFC = () => {
   return (
     <>
-      <header className="flex justify-between px-10 py-8">
+      <header className="flex justify-between px-10 py-5">
         <Link href="/">
           <a>
             <Image

@@ -1,9 +1,5 @@
-const Footer:React.VFC = () => {
-    return (
-        <div style={{backgroundColor:"#639",color:"white",paddingTop:20,paddingBottom:20}}>
-        footer
-        </div>
-    )
-}
+const Footer: React.VFC = () => {
+  return <div className="py-5 text-white bg-gray-800">footer</div>;
+};
 
-export default Footer
+export default Footer;
