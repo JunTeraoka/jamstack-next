@@ -19,20 +19,18 @@ export type POST = {
 };
 
 export type POSTLIST = {
-  staticPosts: {
-    pageInfo: {
-      endCursor: string;
-      hasNextPage: boolean;
-      hasPreviousPage: boolean;
-      startCursor: string;
-    };
-    edges: [
-      {
-        cursor: string;
-        node: POST;
-      }
-    ];
+  pageInfo: {
+    endCursor: string;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
+    startCursor: string;
   };
+  edges: [
+    {
+      cursor: string;
+      node: POST;
+    }
+  ];
 };
 
 //news詳細データ取得用

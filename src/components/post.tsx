@@ -1,9 +1,8 @@
-import { NextPage } from "next";
-import { POST, POSTLIST } from "../types/post";
+import { POST } from "../types/post";
 import Link from "next/link";
 import { changeFormatDate } from "../libs/date";
 
-const Post: NextPage<POST> = ({
+const Post: React.VFC<POST> = ({
   title,
   date,
   featuredImage,

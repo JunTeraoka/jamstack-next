@@ -3,7 +3,7 @@ import { getPagePostsData } from "api/post";
 import { POSTLIST } from "types/post";
 import Post from "components/post";
 
-const Index: NextPage<POSTLIST> = ({ staticPosts }) => {
+const Index: NextPage<POSTLIST> = (staticPosts) => {
   const posts = staticPosts;
   return (
     <>
@@ -21,11 +21,10 @@ const Index: NextPage<POSTLIST> = ({ staticPosts }) => {
 export default Index;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const json = await getPagePostsData(1000);
+  const json = await getPagePostsData();
+  console.log(json.data);
   return {
-    props: {
-      staticPosts: json.data.posts,
-    },
+    props: json.data.posts,
     revalidate: 10,
   };
 };

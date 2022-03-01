@@ -1,11 +1,25 @@
-const Header:React.VFC = () => {
-    return (
-        <>
-        <div style={{backgroundColor:"#639",color:"white",paddingTop:20,paddingBottom:20}}>
-        header
-        </div>
-        </>
-    )
-}
+import Image from "next/image";
+import Link from "next/link";
+import Search from "./search";
 
-export default Header
+const Header: React.VFC = () => {
+  return (
+    <>
+      <header className="flex justify-between px-10 py-8">
+        <Link href="/">
+          <a>
+            <Image
+              src="/img/header_logo.svg"
+              width="160"
+              height="28"
+              alt="logo"
+            />
+          </a>
+        </Link>
+        <Search />
+      </header>
+    </>
+  );
+};
+
+export default Header;

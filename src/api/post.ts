@@ -1,15 +1,25 @@
 import { POSTPATHS } from "types/post";
 import { api_url } from "api/common";
 
+type QUERYPARAMS = {
+  first?: number;
+  search?: string | string[];
+};
+
 //ページ番号に対応するnewsを取得する。
-export const getPagePostsData = async (first: number) => {
+export const getPagePostsData = async (
+  params: QUERYPARAMS = { first: 1000 }
+) => {
   const response = await fetch(api_url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       query: `
       query PostsQuery{
-        posts(first: ${first}){
+        posts(
+          first: ${params.first ?? 1000},
+          where: {search: "${params.search ?? ""}"}
+          ){
           pageInfo {
             endCursor
             hasNextPage
