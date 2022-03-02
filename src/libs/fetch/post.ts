@@ -1,5 +1,5 @@
 import { POSTPATHS, TOTALPAGES, TOTALPOSTS } from "types/post";
-import { api_url } from "libs/common";
+import { api_url } from "libs/fetch/common";
 
 const PERPAGE = 12;
 

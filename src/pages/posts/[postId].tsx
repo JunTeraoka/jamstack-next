@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import useSWR from "swr";
-import { getPostDetailPaths, getPostDetailData } from "libs/post";
+import { getPostDetailPaths, getPostDetailData } from "libs/fetch/post";
 import { POSTDETAIL } from "types/post";
 import { useRouter } from "next/router";
 

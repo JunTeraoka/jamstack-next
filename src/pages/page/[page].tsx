@@ -1,5 +1,9 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { getPostPagePaths, getTotalPages, getPagePostsData } from "libs/post";
+import {
+  getPostPagePaths,
+  getTotalPages,
+  getPagePostsData,
+} from "libs/fetch/post";
 import { POSTLIST, TOTALPAGES } from "../../types/post";
 import { useRouter } from "next/router";
 import Post from "components/post";

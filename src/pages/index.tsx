@@ -1,5 +1,5 @@
 import { GetStaticProps, NextPage } from "next";
-import { getPagePostsData, getTotalPages } from "libs/post";
+import { getPagePostsData, getTotalPages } from "libs/fetch/post";
 import { POSTLIST, TOTALPAGES } from "types/post";
 import Post from "components/post";
 import Pagination from "components/pagination";
