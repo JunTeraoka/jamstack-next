@@ -89,7 +89,7 @@ export const getTotalPages = async (
 //一覧ページのpathを取得
 export const getPostPagePaths = async () => {
   const totalPages = await getTotalPages();
-  return [...Array(totalPages)].map((_, index) => {
+  return [...Array(totalPages.totalPages)].map((_, index) => {
     return {
       params: {
         page: `${index + 1}`,
