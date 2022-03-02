@@ -1,4 +1,4 @@
-import { POSTPATHS, TOTALPOSTS } from "types/post";
+import { POSTPATHS, TOTALPAGES, TOTALPOSTS } from "types/post";
 import { api_url } from "api/common";
 
 const PERPAGE = 12;
@@ -56,15 +56,19 @@ export const getPagePostsData = async (
   return json;
 };
 
-//一覧ページのpathを取得
-export const getPostPagePaths = async () => {
+//ページ数を取得
+export const getTotalPages = async (
+  search: string | string[] = ""
+): Promise<TOTALPAGES> => {
   const response = await fetch(api_url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       query: `
         query PostPagePaths{
-          posts {
+          posts (
+            where: {search: "${search}"}
+          ) {
             pageInfo {
               offsetPagination {
                 total
@@ -79,6 +83,12 @@ export const getPostPagePaths = async () => {
   const totalPages = Math.ceil(
     json.data.posts.pageInfo.offsetPagination.total / PERPAGE
   );
+  return { totalPages: totalPages };
+};
+
+//一覧ページのpathを取得
+export const getPostPagePaths = async () => {
+  const totalPages = await getTotalPages();
   return [...Array(totalPages)].map((_, index) => {
     return {
       params: {

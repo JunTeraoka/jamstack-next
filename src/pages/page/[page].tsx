@@ -1,12 +1,17 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { getPostPagePaths } from "../../api/post";
-import { POSTLIST } from "../../types/post";
+import { getPostPagePaths, getTotalPages } from "../../api/post";
+import { POSTLIST, TOTALPAGES } from "../../types/post";
 import { useRouter } from "next/router";
 import { getPagePostsData } from "api/post";
 import Post from "components/post";
 import Pagination from "components/pagination";
 
-const PostsPage: NextPage<POSTLIST> = (posts) => {
+type Props = {
+  posts: POSTLIST;
+  totalPages: TOTALPAGES;
+};
+
+const PostsPage: NextPage<Props> = ({ posts, totalPages }) => {
   const router = useRouter();
   if (!posts) return <div>Loading....</div>;
   return (
@@ -19,6 +24,8 @@ const PostsPage: NextPage<POSTLIST> = (posts) => {
             ))}
         </ul>
         <Pagination
+          baseUrl="/page/"
+          totalPages={totalPages.totalPages}
           currentPage={Number(router.query.page)}
           hasPrevious={posts.pageInfo?.offsetPagination.hasPrevious}
           hasMore={posts.pageInfo?.offsetPagination.hasMore}
@@ -30,7 +37,7 @@ const PostsPage: NextPage<POSTLIST> = (posts) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const allPaths = await getPostPagePaths();
-  const paths = allPaths.slice(0, Math.min(5, allPaths.length));
+  const paths = allPaths.slice(0, Math.min(10, allPaths.length));
   return {
     paths,
     fallback: true,
@@ -40,8 +47,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const page = Number(context.params!.page as string);
   const json = await getPagePostsData(page);
+  const posts = json.data.posts;
+  const totalPages = await getTotalPages();
   return {
-    props: json.data.posts,
+    props: { posts, totalPages },
     revalidate: 10,
   };
 };

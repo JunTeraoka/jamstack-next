@@ -15,7 +15,7 @@ const PostDetail: NextPage<POSTDETAIL> = ({ staticPostDetail }) => {
   const { data: post, error } = useSWR(path, fetcher, {
     fallbackData: staticPostDetail,
   });
-  if (error) return <div>Loading....</div>;
+  if (error) return <div>error....</div>;
   if (!post) return <div>Loading....</div>;
 
   return (
@@ -30,7 +30,7 @@ const PostDetail: NextPage<POSTDETAIL> = ({ staticPostDetail }) => {
           <h1 className="font-bold text-4xl my-8">{post.title}</h1>
         </header>
         <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
-        <p>{post.categories ? post.categories.nodes[0].name : ""}</p>
+        <p>{post.categories ? post.categories.nodes[0]?.name : ""}</p>
       </article>
     </>
   );

@@ -1,12 +1,15 @@
 import { GetStaticProps, NextPage } from "next";
-import { getPagePostsData } from "api/post";
-import { POSTLIST } from "types/post";
+import { getPagePostsData, getTotalPages } from "api/post";
+import { POSTLIST, TOTALPAGES } from "types/post";
 import Post from "components/post";
 import Pagination from "components/pagination";
-import { useEffect } from "react";
 
-const Index: NextPage<POSTLIST> = (staticPosts) => {
-  const posts = staticPosts;
+type Props = {
+  posts: POSTLIST;
+  totalPages: TOTALPAGES;
+};
+
+const Index: NextPage<Props> = ({ posts, totalPages }) => {
   return (
     <>
       <div>
@@ -17,6 +20,8 @@ const Index: NextPage<POSTLIST> = (staticPosts) => {
             ))}
         </ul>
         <Pagination
+          baseUrl="/page/"
+          totalPages={totalPages.totalPages}
           currentPage={1}
           hasPrevious={posts.pageInfo.offsetPagination.hasPrevious}
           hasMore={posts.pageInfo.offsetPagination.hasMore}
@@ -29,8 +34,10 @@ export default Index;
 
 export const getStaticProps: GetStaticProps = async () => {
   const json = await getPagePostsData();
+  const posts = json.data.posts;
+  const totalPages = await getTotalPages();
   return {
-    props: json.data.posts,
+    props: { posts, totalPages },
     revalidate: 10,
   };
 };

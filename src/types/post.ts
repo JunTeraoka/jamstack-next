@@ -86,3 +86,8 @@ export type TOTALPOSTS = {
     };
   };
 };
+
+//post数取得用
+export type TOTALPAGES = {
+  totalPages: number;
+};
