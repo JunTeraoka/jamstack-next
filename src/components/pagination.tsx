@@ -31,6 +31,9 @@ const Pagination: React.VFC<Props> = ({
         )}
         {[...Array(Math.min(totalPages, 7))].map((_, index) => {
           const pageIndex = firstPage + index;
+          if (totalPages < pageIndex) {
+            return <></>;
+          }
           return (
             <Link key={`page-${pageIndex}`} href={`${baseUrl}${pageIndex}`}>
               <a
