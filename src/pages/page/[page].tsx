@@ -13,7 +13,8 @@ type Props = {
 
 const PostsPage: NextPage<Props> = ({ posts, totalPages }) => {
   const router = useRouter();
-  if (!posts) return <div>Loading....</div>;
+  const { isFallback } = router;
+  if (isFallback) return <div>Loading....</div>;
   return (
     <>
       <div>

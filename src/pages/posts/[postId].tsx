@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 
 const PostDetail: NextPage<POSTDETAIL> = ({ staticPostDetail }) => {
   const router = useRouter();
+  const { isFallback } = router;
   const id = router.query;
   const path = router.asPath;
   const fetcher = async () => {
@@ -15,9 +16,8 @@ const PostDetail: NextPage<POSTDETAIL> = ({ staticPostDetail }) => {
   const { data: post, error } = useSWR(path, fetcher, {
     fallbackData: staticPostDetail,
   });
-  if (error) return <div>error....</div>;
-  if (!post) return <div>Loading....</div>;
 
+  if (isFallback) return <div>Loading....</div>;
   return (
     <>
       <article>
