@@ -40,7 +40,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getPostDetailPaths();
   return {
     paths,
-    fallback: true,
+    fallback: "blocking",
   };
 };
 
