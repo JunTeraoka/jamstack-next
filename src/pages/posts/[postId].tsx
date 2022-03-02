@@ -4,17 +4,16 @@ import { getPostDetailPaths, getPostDetailData } from "libs/fetch/post";
 import { POSTDETAIL } from "types/post";
 import { useRouter } from "next/router";
 
-const PostDetail: NextPage<POSTDETAIL> = ({ staticPostDetail }) => {
+const PostDetail: NextPage<POSTDETAIL> = (postDetail) => {
   const router = useRouter();
   const { isFallback } = router;
   const id = router.query;
   const path = router.asPath;
   const fetcher = async () => {
-    const result = await getPostDetailData(Number(id.postId));
-    return result.data.postBy;
+    return await getPostDetailData(Number(id.postId));
   };
   const { data: post, error } = useSWR(path, fetcher, {
-    fallbackData: staticPostDetail,
+    fallbackData: postDetail,
   });
 
   if (isFallback) return <div>Loading....</div>;
@@ -46,11 +45,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const postId = context.params!.postId as string;
-  const json = await getPostDetailData(Number(postId));
+  const postDetail = await getPostDetailData(Number(postId));
   return {
-    props: {
-      staticPostDetail: json.data.postBy,
-    },
+    props: postDetail,
     revalidate: 10,
   };
 };

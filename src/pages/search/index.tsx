@@ -10,15 +10,10 @@ export default function Page() {
   const router = useRouter();
   const query = router.query;
 
-  const searchPosts = async () => {
-    const json = await getPagePostsData(Number(query.p), query.s);
-    return json.data.posts;
-  };
-
   useEffect(() => {
     if (Object.keys(query).length > 0) {
       (async () => {
-        const searchedPosts = await searchPosts();
+        const searchedPosts = await getPagePostsData(Number(query.p), query.s);
         setPosts(searchedPosts);
       })();
     }

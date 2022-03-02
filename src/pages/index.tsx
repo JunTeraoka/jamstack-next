@@ -33,8 +33,7 @@ const Index: NextPage<Props> = ({ posts, totalPages }) => {
 export default Index;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const json = await getPagePostsData();
-  const posts = json.data.posts;
+  const posts = await getPagePostsData();
   const totalPages = await getTotalPages();
   return {
     props: { posts, totalPages },

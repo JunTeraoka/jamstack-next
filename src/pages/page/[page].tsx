@@ -50,8 +50,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const page = Number(context.params!.page as string);
-  const json = await getPagePostsData(page);
-  const posts = json.data.posts;
+  const posts = await getPagePostsData(page);
   const totalPages = await getTotalPages();
   return {
     props: { posts, totalPages },
