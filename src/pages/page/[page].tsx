@@ -1,8 +1,7 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { getPostPagePaths, getTotalPages } from "../../api/post";
+import { getPostPagePaths, getTotalPages, getPagePostsData } from "libs/post";
 import { POSTLIST, TOTALPAGES } from "../../types/post";
 import { useRouter } from "next/router";
-import { getPagePostsData } from "api/post";
 import Post from "components/post";
 import Pagination from "components/pagination";
 

@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import useSWR from "swr";
-import { getPostDetailPaths, getPostDetailData } from "../../api/post";
-import { POSTDETAIL } from "../../types/post";
+import { getPostDetailPaths, getPostDetailData } from "libs/post";
+import { POSTDETAIL } from "types/post";
 import { useRouter } from "next/router";
 
 const PostDetail: NextPage<POSTDETAIL> = ({ staticPostDetail }) => {

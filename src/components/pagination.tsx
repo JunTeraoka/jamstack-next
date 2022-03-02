@@ -1,6 +1,4 @@
-import { getPostPagePaths } from "api/post";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 type Props = {
   baseUrl: string;

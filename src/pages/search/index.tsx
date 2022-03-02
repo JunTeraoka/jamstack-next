@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { getPagePostsData } from "api/post";
+import { getPagePostsData } from "libs/post";
 import { useEffect, useState } from "react";
 import { POSTLIST } from "types/post";
 import Post from "components/post";
