@@ -106,7 +106,7 @@ export const getPostDetailPaths = async () => {
     body: JSON.stringify({
       query: `
         query PostPaths{
-          posts {
+          posts (first: ${PERPAGE * 2}) {
             nodes {
               postId
             }
