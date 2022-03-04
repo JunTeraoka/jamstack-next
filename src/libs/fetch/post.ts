@@ -4,11 +4,10 @@ import {
   POSTLIST,
   POSTPATH,
   TOTALPAGES,
-  TOTALPOSTS,
 } from "types/post";
-import { API_URL, fetchAPI } from "libs/fetch/common";
+import { fetchAPI } from "libs/fetch/common";
 
-const PERPAGE = 12;
+const PERPAGE = 6;
 
 //ページ番号に対応するpostを取得する。
 export const getPagePostsData = async (
@@ -156,7 +155,7 @@ export const getPostDetailData = async (
   return data.postBy;
 };
 
-export async function getPreviewPost(id, idType = "DATABASE_ID") {
+export async function getPreviewPost(id: number, idType = "DATABASE_ID") {
   const data = await fetchAPI(
     `
     query PreviewPost($id: ID!, $idType: PostIdType!) {
