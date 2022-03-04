@@ -44,7 +44,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = allPaths.slice(0, Math.min(10, allPaths.length));
   return {
     paths,
-    fallback: "blocking",
+    fallback: true,
   };
 };
 

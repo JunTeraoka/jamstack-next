@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 const PostDetail: NextPage<POSTDETAIL> = (post) => {
   const router = useRouter();
   const { isFallback } = router;
-  if (isFallback) return <div>Loading....</div>;
+  // if (isFallback) return <div>Loading....</div>;
   return (
     <>
       <article>
@@ -29,7 +29,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getPostDetailPaths();
   return {
     paths,
-    fallback: "blocking",
+    fallback: true,
   };
 };
 
