@@ -12,7 +12,7 @@ const Post: React.VFC<POST> = ({
   return (
     <>
       <li className="block">
-        <Link href={`/posts/${postId}`}>
+        <Link href={`/posts/${postId}`} prefetch={false}>
           <a>
             <img
               src={featuredImage?.node.sourceUrl ?? "/img/no_image.png"}
