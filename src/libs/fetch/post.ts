@@ -7,7 +7,7 @@ import {
 } from "types/post";
 import { fetchAPI } from "libs/fetch/common";
 
-const PERPAGE = 6;
+const PERPAGE = 12;
 
 //ページ番号に対応するpostを取得する。
 export const getPagePostsData = async (
