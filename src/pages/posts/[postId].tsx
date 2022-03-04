@@ -1,21 +1,11 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import useSWR from "swr";
 import { getPostDetailPaths, getPostDetailData } from "libs/fetch/post";
 import { POSTDETAIL } from "types/post";
 import { useRouter } from "next/router";
 
-const PostDetail: NextPage<POSTDETAIL> = (postDetail) => {
+const PostDetail: NextPage<POSTDETAIL> = (post) => {
   const router = useRouter();
   const { isFallback } = router;
-  const id = router.query;
-  const path = router.asPath;
-  const fetcher = async () => {
-    return await getPostDetailData(Number(id.postId));
-  };
-  const { data: post, error } = useSWR(path, fetcher, {
-    fallbackData: postDetail,
-  });
-
   if (isFallback) return <div>Loading....</div>;
   return (
     <>
@@ -43,8 +33,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const postId = context.params!.postId as string;
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  // const postId = preview ? previewData.post.id : (params.postId as string);
+  const postId = params.postId as string;
   const postDetail = await getPostDetailData(Number(postId));
   return {
     props: postDetail,
