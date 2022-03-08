@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { getPagePostsData } from "libs/fetch/post";
+import { getSearchPosts } from "libs/fetch/search";
 import { useEffect, useState } from "react";
 import { POSTLIST } from "types/post";
 import Post from "components/post";
@@ -13,7 +13,7 @@ export default function Page() {
   useEffect(() => {
     if (Object.keys(query).length > 0) {
       (async () => {
-        const searchedPosts = await getPagePostsData(Number(query.p), query.s);
+        const searchedPosts = await getSearchPosts(Number(query.p), query.s);
         setPosts(searchedPosts);
       })();
     }

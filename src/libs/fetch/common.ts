@@ -1,4 +1,5 @@
-export const API_URL = process.env.NEXT_PUBLIC_WORDPRESS_URL as string;
+const API_URL = process.env.NEXT_PUBLIC_WORDPRESS_URL as string;
+export const PERPAGE = 12; // 一覧ページに表示する投稿数
 
 type VARIABLES = {
   variables?: Object;

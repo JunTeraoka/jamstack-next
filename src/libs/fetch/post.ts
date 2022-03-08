@@ -5,21 +5,15 @@ import {
   POSTPATH,
   TOTALPAGES,
 } from "types/post";
-import { fetchAPI } from "libs/fetch/common";
-
-const PERPAGE = 12;
+import { fetchAPI, PERPAGE } from "libs/fetch/common";
 
 //ページ番号に対応するpostを取得する。
-export const getPagePostsData = async (
-  page: number = 1,
-  search: string | string[] = ""
-): Promise<POSTLIST> => {
+export const getPosts = async (page: number = 1): Promise<POSTLIST> => {
   const data = await fetchAPI(
     `
-      query PostsQuery($search: String, $offset: Int, $size: Int) {
+      query Posts($offset: Int, $size: Int) {
         posts(
           where: {
-            search: $search,
             offsetPagination: {offset: $offset, size: $size}
           }
           ){
@@ -55,7 +49,6 @@ export const getPagePostsData = async (
       variables: {
         offset: (page - 1) * PERPAGE,
         size: PERPAGE,
-        search: search,
       },
     }
   );
@@ -63,15 +56,11 @@ export const getPagePostsData = async (
 };
 
 //ページ数を取得
-export const getTotalPages = async (
-  search: string | string[] = ""
-): Promise<TOTALPAGES> => {
+export const getTotalPages = async (): Promise<TOTALPAGES> => {
   const data = await fetchAPI(
     `
-        query PostPagePaths($search: String){
-          posts (
-            where: {search: $search}
-          ) {
+        query TotalPages{
+          posts{
             pageInfo {
               offsetPagination {
                 total
@@ -79,12 +68,7 @@ export const getTotalPages = async (
             }
           }
         }
-      `,
-    {
-      variables: {
-        search: search,
-      },
-    }
+      `
   );
   const totalPages = Math.ceil(
     data.posts.pageInfo.offsetPagination.total / PERPAGE
@@ -93,9 +77,10 @@ export const getTotalPages = async (
 };
 
 //一覧ページのpathを取得
-export const getPostPagePaths = async (): Promise<PAGEPATH[]> => {
-  const totalPages = await getTotalPages();
-  return [...Array(totalPages.totalPages)].map((_, index) => {
+export const getPostPagePaths = async (
+  totalPages: number
+): Promise<PAGEPATH[]> => {
+  return [...Array(totalPages)].map((_, index) => {
     return {
       params: {
         page: `${index + 1}`,
@@ -104,35 +89,12 @@ export const getPostPagePaths = async (): Promise<PAGEPATH[]> => {
   });
 };
 
-//post詳細のpathを取得
-export const getPostDetailPaths = async (): Promise<POSTPATH[]> => {
-  const data = await fetchAPI(`
-        query PostPaths{
-          posts (first: ${PERPAGE * 2}) {
-            nodes {
-              postId
-            }
-          }
-        }
-      `);
-  const posts = data.posts.nodes;
-  return posts.map((post) => {
-    return {
-      params: {
-        postId: `${post.postId}`,
-      },
-    };
-  });
-};
-
 //postの詳細取得
-export const getPostDetailData = async (
-  postId: number
-): Promise<POSTDETAIL> => {
+export const getPostDetail = async (postSlug: string): Promise<POSTDETAIL> => {
   const data = await fetchAPI(
     `
-      query NewsDetailQuery($postId: Int){
-        postBy(postId: $postId) {
+      query PostDetail($postSlug: String){
+        postBy(slug: $postSlug) {
           postId
           title
           date
@@ -150,11 +112,33 @@ export const getPostDetailData = async (
         }
       }
     `,
-    { variables: { postId: postId } }
+    { variables: { postSlug: postSlug } }
   );
   return data.postBy;
 };
 
+//post詳細のpathを取得
+export const getPostDetailPaths = async (): Promise<POSTPATH[]> => {
+  const data = await fetchAPI(`
+        query PostPaths{
+          posts (first: ${PERPAGE * 2}) {
+            nodes {
+              slug
+            }
+          }
+        }
+      `);
+  const posts = data.posts.nodes;
+  return posts.map((post) => {
+    return {
+      params: {
+        slug: `${post.slug}`,
+      },
+    };
+  });
+};
+
+// プレビューデータ取得
 export async function getPreviewPost(id: number, idType = "DATABASE_ID") {
   const data = await fetchAPI(
     `

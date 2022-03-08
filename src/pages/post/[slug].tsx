@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { getPostDetailPaths, getPostDetailData } from "libs/fetch/post";
+import { getPostDetailPaths, getPostDetail } from "libs/fetch/post";
 import { POSTDETAIL } from "types/post";
 import { useRouter } from "next/router";
 
@@ -35,8 +35,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   // const postId = preview ? previewData.post.id : (params.postId as string);
-  const postId = params.postId as string;
-  const postDetail = await getPostDetailData(Number(postId));
+  const postSlug = params.slug as string;
+  const postDetail = await getPostDetail(postSlug);
   return {
     props: postDetail,
     revalidate: 10,

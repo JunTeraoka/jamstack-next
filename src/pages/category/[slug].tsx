@@ -1,5 +1,9 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { getPostPagePaths, getTotalPages, getPosts } from "libs/fetch/post";
+import {
+  getCategoryPaths,
+  getCategoryPosts,
+  getCategoryTotalPages,
+} from "libs/fetch/category";
 import { POSTLIST, TOTALPAGES } from "../../types/post";
 import { useRouter } from "next/router";
 import Post from "components/post";
@@ -36,9 +40,7 @@ const PostsPage: NextPage<Props> = ({ posts, totalPages }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const totalPagesData = await getTotalPages();
-  const allPaths = await getPostPagePaths(totalPagesData.totalPages);
-  const paths = allPaths.slice(0, Math.min(10, allPaths.length));
+  const paths = await getCategoryPaths();
   return {
     paths,
     fallback: true,
@@ -46,9 +48,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const page = Number(context.params!.page as string);
-  const posts = await getPosts(page);
-  const totalPages = await getTotalPages();
+  const slug = context.params!.slug as string;
+  const posts = await getCategoryPosts(1, slug);
+  const totalPages = await getCategoryTotalPages(slug);
   return {
     props: { posts, totalPages },
     revalidate: 10,

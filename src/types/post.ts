@@ -1,5 +1,4 @@
 export type POST = {
-  id: string;
   postId: number;
   title: string;
   slug: string;
@@ -56,7 +55,7 @@ export type POSTDETAIL = {
 //post詳細パス取得用
 export type POSTPATH = {
   params: {
-    postId: string;
+    slug: string;
   };
 };
 

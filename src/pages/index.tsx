@@ -1,5 +1,5 @@
 import { GetStaticProps, NextPage } from "next";
-import { getPagePostsData, getTotalPages } from "libs/fetch/post";
+import { getPosts, getTotalPages } from "libs/fetch/post";
 import { POSTLIST, TOTALPAGES } from "types/post";
 import Post from "components/post";
 import Pagination from "components/pagination";
@@ -33,7 +33,7 @@ const Index: NextPage<Props> = ({ posts, totalPages }) => {
 export default Index;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await getPagePostsData();
+  const posts = await getPosts();
   const totalPages = await getTotalPages();
   return {
     props: { posts, totalPages },
