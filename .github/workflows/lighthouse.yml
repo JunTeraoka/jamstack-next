@@ -13,7 +13,7 @@ jobs:
       - name: yarn install, build
         run: |
           rm -rf node_modules
-          yarn --frozen-lockfile --ignore-optional
+          yarn --frozen-lockfile
           yarn build
       - name: run Lighthouse CI
         run: |
