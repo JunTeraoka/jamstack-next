@@ -12,8 +12,8 @@ jobs:
           node-version: 12.x
       - name: yarn install, build
         run: |
-          yarn install --frozen-lockfile
-          yarn build
+          yarn --frozen-lockfile --ignore-optional
+          rm -rf node_modules && yarn build
       - name: run Lighthouse CI
         run: |
           yarn install -g @lhci/cli@0.8.x
