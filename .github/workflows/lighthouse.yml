@@ -1,5 +1,12 @@
 name: lighthouse
-on: [push]
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - "main"
+env:
+  NEXT_PUBLIC_WORDPRESS_URL: ${{secrets.NEXT_PUBLIC_WORDPRESS_URL}}
 jobs:
   lhci:
     name: Lighthouse
@@ -12,9 +19,10 @@ jobs:
           node-version: 12.x
       - name: yarn install, build
         run: |
-          yarn install
-          yarn run build
+          rm -rf node_modules
+          yarn --frozen-lockfile
+          yarn build
       - name: run Lighthouse CI
         run: |
-          yarn install -g @lhci/cli@0.8.x
+          yarn global add @lhci/cli@0.8.x
           lhci autorun
