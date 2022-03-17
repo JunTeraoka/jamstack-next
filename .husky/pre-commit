@@ -3,7 +3,7 @@
 
 yarn lint-staged
 
-# # user.nameの確認
+# user.nameの確認
 # if [ "`git config --local user.name`" != "vercel-bike-startup"  ]; then
 #   echo "fatal: user.name is not set correctly"
 #   exit 1

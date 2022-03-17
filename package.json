@@ -5,20 +5,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint & yarn prettier --check",
+    "prettier": "prettier --ignore-path .gitignore --check './**/*.{js,jsx,ts,tsx,json,css,scss}'",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css,scss}'",
     "lhci": "lhci autorun",
     "test": "jest",
     "postinstall": "husky install"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn format & yarn lint & sh script/pre-commit.sh"
-    }
-  },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "yarn format",
       "yarn lint"
     ]
   },
