@@ -1,4 +1,4 @@
-import { DEVICES, GOTO_OPTIONS } from "tests/config";
+import { DEVICES, GOTO_OPTIONS } from "tests/vrt/config";
 
 // テスト対象のURL
 const URL = "http://localhost:3000/page/2";

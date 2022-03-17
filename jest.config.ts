@@ -8,7 +8,7 @@ module.exports = {
     "^.+\\.ts$": "ts-jest",
   },
   testMatch: ["<rootDir>/src/tests/**/*.test.(ts|js)"],
-  setupFilesAfterEnv: ["<rootDir>/jest-setup.ts"], // jestのsetupファイルとしてjest-setup.tsを追加
+  setupFilesAfterEnv: ["<rootDir>/src/tests/jest-setup.ts"], // jestのsetupファイルとしてjest-setup.tsを追加
   globals: {
     "ts-jest": {
       tsconfig: "<rootDir>/tsconfig.json",
