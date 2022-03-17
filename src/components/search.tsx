@@ -25,9 +25,9 @@ const Search: React.VFC<PROPS> = ({ className }) => {
         onChange={(e) => {
           setQuery(e.target.value);
         }}
-        className="p-2 border"
+        className="border p-2"
       />
-      <button type="submit" className="px-4 py-2 bg-blue-500 text-white">
+      <button type="submit" className="bg-blue-500 px-4 py-2 text-white">
         検索
       </button>
     </form>

@@ -1,5 +1,5 @@
 const Footer: React.VFC = () => {
-  return <div className="py-5 text-white bg-gray-800">footer</div>;
+  return <div className="bg-gray-800 py-5 text-white">footer</div>;
 };
 
 export default Footer;
