@@ -5,16 +5,11 @@ type VARIABLES = {
   variables?: Object;
 };
 
-export const fetchAPI = async (
-  query: string,
-  { variables }: VARIABLES = {}
-) => {
+export const fetchAPI = async (query: string, { variables }: VARIABLES = {}) => {
   const headers = { "Content-Type": "application/json" };
 
   if (process.env.WORDPRESS_AUTH_REFRESH_TOKEN) {
-    headers[
-      "Authorization"
-    ] = `Bearer ${process.env.WORDPRESS_AUTH_REFRESH_TOKEN}`;
+    headers["Authorization"] = `Bearer ${process.env.WORDPRESS_AUTH_REFRESH_TOKEN}`;
   }
 
   const res = await fetch(API_URL, {

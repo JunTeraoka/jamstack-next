@@ -2,13 +2,7 @@ import { POST } from "../types/post";
 import Link from "next/link";
 import { changeFormatDate } from "../libs/date";
 
-const Post: React.VFC<POST> = ({
-  title,
-  date,
-  featuredImage,
-  categories,
-  slug,
-}) => {
+const Post: React.VFC<POST> = ({ title, date, featuredImage, categories, slug }) => {
   return (
     <>
       <li className="block">
@@ -23,9 +17,7 @@ const Post: React.VFC<POST> = ({
             <span className="text-xs text-red-400 mx-1">
               {changeFormatDate(date, "YYYY.MM.DD")}
             </span>
-            <span className="text-xs text-gray-500 mx-1">
-              {categories.nodes[0]?.name}
-            </span>
+            <span className="text-xs text-gray-500 mx-1">{categories.nodes[0]?.name}</span>
           </a>
         </Link>
       </li>

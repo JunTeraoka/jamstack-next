@@ -24,10 +24,7 @@ export default function Page() {
   return (
     <>
       <ul className="grid grid-cols-3 gap-4">
-        {posts.edges &&
-          posts.edges.map((post) => (
-            <Post key={post.node.postId} {...post.node} />
-          ))}
+        {posts.edges && posts.edges.map((post) => <Post key={post.node.postId} {...post.node} />)}
       </ul>
     </>
   );

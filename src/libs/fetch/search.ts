@@ -55,9 +55,7 @@ export const getSearchPosts = async (
 };
 
 //ページ数を取得
-export const getSearchTotalPages = async (
-  search: string | string[] = ""
-): Promise<TOTALPAGES> => {
+export const getSearchTotalPages = async (search: string | string[] = ""): Promise<TOTALPAGES> => {
   const data = await fetchAPI(
     `
         query TotalPages($search: String){
@@ -78,8 +76,6 @@ export const getSearchTotalPages = async (
       },
     }
   );
-  const totalPages = Math.ceil(
-    data.posts.pageInfo.offsetPagination.total / PERPAGE
-  );
+  const totalPages = Math.ceil(data.posts.pageInfo.offsetPagination.total / PERPAGE);
   return { totalPages: totalPages };
 };
