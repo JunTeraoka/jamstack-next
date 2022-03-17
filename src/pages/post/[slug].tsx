@@ -16,7 +16,7 @@ const PostDetail: NextPage<POSTDETAIL> = (post) => {
             width="800"
             height="400"
           />
-          <h1 className="font-bold text-4xl my-8">{post.title}</h1>
+          <h1 className="my-8 text-4xl font-bold">{post.title}</h1>
         </header>
         <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
         <p>{post.categories ? post.categories.nodes[0]?.name : ""}</p>

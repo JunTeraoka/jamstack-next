@@ -13,11 +13,11 @@ const Post: React.VFC<POST> = ({ title, date, featuredImage, categories, slug })
               width="300"
               height="200"
             />
-            <span className="font-bold mx-1">{title}</span>
-            <span className="text-xs text-red-400 mx-1">
+            <span className="mx-1 font-bold">{title}</span>
+            <span className="mx-1 text-xs text-red-400">
               {changeFormatDate(date, "YYYY.MM.DD")}
             </span>
-            <span className="text-xs text-gray-500 mx-1">{categories.nodes[0]?.name}</span>
+            <span className="mx-1 text-xs text-gray-500">{categories.nodes[0]?.name}</span>
           </a>
         </Link>
       </li>
