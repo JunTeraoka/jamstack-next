@@ -14,10 +14,7 @@ const Index: NextPage<Props> = ({ posts, totalPages }) => {
     <>
       <div>
         <ul className="grid grid-cols-3 gap-4">
-          {posts.edges &&
-            posts.edges.map((post) => (
-              <Post key={post.node.postId} {...post.node} />
-            ))}
+          {posts.edges && posts.edges.map((post) => <Post key={post.node.postId} {...post.node} />)}
         </ul>
         <Pagination
           baseUrl="/page/"

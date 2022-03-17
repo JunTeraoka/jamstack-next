@@ -1,10 +1,4 @@
-import {
-  PAGEPATH,
-  POSTDETAIL,
-  POSTLIST,
-  POSTPATH,
-  TOTALPAGES,
-} from "types/post";
+import { PAGEPATH, POSTDETAIL, POSTLIST, POSTPATH, TOTALPAGES } from "types/post";
 import { fetchAPI, PERPAGE } from "libs/fetch/common";
 
 //ページ番号に対応するpostを取得する。
@@ -70,16 +64,12 @@ export const getTotalPages = async (): Promise<TOTALPAGES> => {
         }
       `
   );
-  const totalPages = Math.ceil(
-    data.posts.pageInfo.offsetPagination.total / PERPAGE
-  );
+  const totalPages = Math.ceil(data.posts.pageInfo.offsetPagination.total / PERPAGE);
   return { totalPages: totalPages };
 };
 
 //一覧ページのpathを取得
-export const getPostPagePaths = async (
-  totalPages: number
-): Promise<PAGEPATH[]> => {
+export const getPostPagePaths = async (totalPages: number): Promise<PAGEPATH[]> => {
   return [...Array(totalPages)].map((_, index) => {
     return {
       params: {

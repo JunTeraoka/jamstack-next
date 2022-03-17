@@ -24,11 +24,7 @@ const Pagination: React.VFC<Props> = ({
             <Link key="page-first" href={`${baseUrl}1`} prefetch={false}>
               <a className="px-2 py-2 border">{"<<"}</a>
             </Link>
-            <Link
-              key="page-previous"
-              href={`${baseUrl}${currentPage - 1}`}
-              prefetch={false}
-            >
+            <Link key="page-previous" href={`${baseUrl}${currentPage - 1}`} prefetch={false}>
               <a className="px-2 py-2 border">{"<"}</a>
             </Link>
           </>
@@ -39,11 +35,7 @@ const Pagination: React.VFC<Props> = ({
             return <></>;
           }
           return (
-            <Link
-              key={`page-${pageIndex}`}
-              href={`${baseUrl}${pageIndex}`}
-              prefetch={false}
-            >
+            <Link key={`page-${pageIndex}`} href={`${baseUrl}${pageIndex}`} prefetch={false}>
               <a
                 className={`px-2 py-2 border ${
                   pageIndex == currentPage ? "bg-gray-700 text-white" : ""
@@ -56,18 +48,10 @@ const Pagination: React.VFC<Props> = ({
         })}
         {hasMore && (
           <>
-            <Link
-              key="page-next"
-              href={`${baseUrl}${currentPage + 1}`}
-              prefetch={false}
-            >
+            <Link key="page-next" href={`${baseUrl}${currentPage + 1}`} prefetch={false}>
               <a className="px-2 py-2 border">{">"}</a>
             </Link>
-            <Link
-              key="page-last"
-              href={`${baseUrl}${totalPages}`}
-              prefetch={false}
-            >
+            <Link key="page-last" href={`${baseUrl}${totalPages}`} prefetch={false}>
               <a className="px-2 py-2 border">{">>"}</a>
             </Link>
           </>
